@@ -1,9 +1,7 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Card, CardImg, CardText, CardBody, CardTitle } from 'reactstrap';
 
-class Dishdetail extends Component {
-
-    renderDishDetails(dish) {
+    function RenderDish({dish}){
 
         if (dish != null) {
             return (
@@ -19,7 +17,7 @@ class Dishdetail extends Component {
                     </div>
                     <div className="col-12 col-md-5 m-1" >
                         <h2>Comments</h2>
-                        {this.renderComments(dish)}
+                        <RenderComments dish={dish} />
                     </div>
                 </React.Fragment>
             )
@@ -28,17 +26,17 @@ class Dishdetail extends Component {
             return (<div></div>)
         }
     }
-
-    render() {
-        const { dish } = this.props;
+    
+    const DishDetails = (props) => {
+        //const { dish } = props;
         return (
             <div className="row">
-                {this.renderDishDetails(dish)}
+                <RenderDish dish={props.dish} />
             </div>
         );
     }
 
-    renderComments(dish) {
+    function RenderComments({dish}) {
         if (dish != null) {
             var comments = dish.comments;
             const formattedComment = comments.map(comment => {
@@ -46,7 +44,7 @@ class Dishdetail extends Component {
                 return (
                     <React.Fragment>
                         <li>{comment.comment}</li><br />
-                        <li>-- {comment.author}, {this.formatDate(comment.date)}</li><br />
+                        <li>-- {comment.author}, {comment.date}</li><br />
                     </React.Fragment>
                 )
             });
@@ -61,10 +59,4 @@ class Dishdetail extends Component {
         }
     }
 
-    formatDate(date) {
-        var dateFormat = require('dateformat');
-        var newDate = dateFormat(date, "mmm, dd, yyyy");
-        return newDate;
-    }
-}
-export default Dishdetail;
+export default DishDetails;
