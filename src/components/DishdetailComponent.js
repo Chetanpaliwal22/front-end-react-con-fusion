@@ -19,15 +19,6 @@ import { Link } from 'react-router-dom';
             return (<div></div>)
         }
     }
-    
-    const DishDetails = (props) => {
-        //const { dish } = props;
-        return (
-            <div className="row">
-                <RenderDish dish={props.dish} />
-            </div>
-        );
-    }
 
     function RenderComments({dish}) {
         if (dish != null) {
