@@ -3,26 +3,27 @@ import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardHeader, Media } from "r
 import { Link } from "react-router-dom";
 
 function About(props) {
-    const RenderLeader = ({ leaders }) => {
-        const leaders_list = props.leaders.map(leader => {
-            return (
-                <div key={leader.id} className="col-12 mt-3">
-                    <Media>
-                        <Media left>
-                            <Media object src={leader.image} alt={leader.name} />
-                        </Media>
-                        <Media body className="ml-2">
-                            <Media heading>{leader.name}</Media>
-                            <p>{leader.designation}</p>
-                            <p>{leader.description}</p>
-                        </Media>
-                    </Media>
-                </div>
-            );
-        });
-
-        return <Media list>{leaders_list}</Media>;
-    };
+    const leaders_list = props.leaders.map(leader => {
+        return (
+            //RenderLeader function is called to dispaly the leader info.
+            <RenderLeader leader={leader} />
+        );
+    });
+    //<RenderLeader> functional component with leader as its parameter
+    function RenderLeader({ leader }) {
+        return (
+            <Media>
+                <Media left>
+                    <Media object src={leader.image} alt={leader.name} />
+                </Media>
+                <Media body className="ml-2">
+                    <Media heading>{leader.name}</Media>
+                    <p>{leader.designation}</p>
+                    <p>{leader.description}</p>
+                </Media>
+            </Media>
+        );
+    }
 
     return (
         <div className="container">
@@ -100,7 +101,9 @@ function About(props) {
                 </div>
 
                 <div className="col-12">
-                    <RenderLeader leaders={props.leaders} />
+                    <Media list>
+                        {leaders_list}
+                    </Media>
                 </div>
             </div>
         </div>
