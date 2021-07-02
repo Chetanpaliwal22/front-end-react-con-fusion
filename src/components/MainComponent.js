@@ -59,6 +59,7 @@ class Main extends Component {
         };
 
         const HomePage = () => {
+            if(!this.props.dishes.dishes) return null;
             return (
                 <Home
                     dish={this.props.dishes.dishes.filter(dish => dish.featured)[0]}
